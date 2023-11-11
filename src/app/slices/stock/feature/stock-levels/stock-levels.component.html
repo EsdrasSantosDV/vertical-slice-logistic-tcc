@@ -1,0 +1,17 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="crud-feature">
+    <div class="crud-feature">
+      <div class="crud-feature__header">
+        <app-calculate-stock-levels [products]="products()" (parametersEmitterLevel)="calculateLevels($event)">
+        </app-calculate-stock-levels>
+      </div>
+      <div class="crud-feature__content">
+        <app-stock-table-setup
+          [stockLevels]="stockLevels()"
+
+        >
+        </app-stock-table-setup>
+      </div>
+    </div>
+  </div>
+</ng-container>

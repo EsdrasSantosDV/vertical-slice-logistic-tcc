@@ -1,0 +1,112 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Determinar Niveis de Estoque</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="form">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Selecione o periodo</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input
+              matStartDate
+              formControlName="startDate"
+              placeholder="Ínicio" />
+            <input matEndDate formControlName="endDate" placeholder="Fim" />
+          </mat-date-range-input>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Digite a margem</mat-label>
+          <input
+            matInput
+            placeholder="Margem"
+            type="number"
+            formControlName="margin" />
+        </mat-form-field>
+      </div>
+      <ng-container formArrayName="productsStock">
+        <ng-container
+          *ngFor="let productsStock of productsStock.controls; let i = index">
+          <div [formGroup]="productsStock" class="form-array">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Selecione o Produto</mat-label>
+              <mat-select
+                formControlName="productId"
+                disableOptionCentering
+                disableRipple>
+                <mat-option
+                  *ngFor="let produto of products; trackBy: trackById"
+                  [value]="produto.id"
+                  >{{ produto.name }}</mat-option
+                >
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Digite a tempo de reposição</mat-label>
+              <input
+                matInput
+                placeholder="Tempo de Reposição"
+                type="number"
+                formControlName="replacementTime" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Digite o custo do pedido</mat-label>
+              <input
+                matInput
+                placeholder="Custo do pedido"
+                type="number"
+                formControlName="orderCost" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Digite o custo de armazenamento</mat-label>
+              <input
+                matInput
+                placeholder="Custo de armazenamento"
+                type="number"
+                formControlName="storageCost" />
+            </mat-form-field>
+
+
+            <button color="primary" class="button-delete" mat-mini-fab>
+              <mat-icon (click)="deleteProduct(i)"> delete_forever</mat-icon>
+            </button>
+          </div>
+        </ng-container>
+      </ng-container>
+
+
+        <button
+          color="primary"
+          mat-mini-fab
+          class="add-product-btn"
+          (click)="addProduct()">
+
+          <mat-icon class="add-course-btn">add</mat-icon>
+        </button>
+  
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button mat-raised-button color="secondary" (click)="resetForms()">
+      Limpar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!form.valid"
+      (click)="determinateLevel()">
+      Calcular Níveis
+    </button>
+  </mat-card-actions>
+</mat-card>
