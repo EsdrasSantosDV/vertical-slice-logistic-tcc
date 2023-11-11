@@ -13,4 +13,7 @@ export class ProductService {
   getAll() {
     return this.#http.get<Product[]>(this.#url + '/get-products');
   }
+
+  
+
 }

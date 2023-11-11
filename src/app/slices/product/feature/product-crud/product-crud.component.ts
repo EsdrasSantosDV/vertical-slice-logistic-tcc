@@ -15,6 +15,7 @@ import { ProductTableComponent } from '../../ui/product-table/product-table.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductCrudComponent {
+
   readonly #logisticFacade = inject(FacadeProductService);
   readonly fields = this.#logisticFacade.fieldsFilter;
   readonly products = this.#logisticFacade.products;
@@ -25,4 +26,10 @@ export class ProductCrudComponent {
     .loadProducts()
     .pipe(takeUntilDestroyed());
   readonly vm$ = combineLatest([this.fields$, this.products$]);
+
+
+  addingProduct() {
+    this.#logisticFacade.createProduct();
+  }
+
 }
