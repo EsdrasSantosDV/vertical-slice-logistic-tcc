@@ -1,0 +1,17 @@
+<ng-container *ngIf="vm$ | async as vm">
+  <div class="crud-feature">
+    <div class="crud-feature">
+      <div class="crud-feature__header">
+        <app-filter-generic
+          class="full-width"
+          [formHeaderTitle]="'Produto'"
+          [fieldsGeneric]="fields()">
+        </app-filter-generic>
+      </div>
+
+      <div class="crud-feature__content">
+        <app-product-table [products]="products()"> </app-product-table>
+      </div>
+    </div>
+  </div>
+</ng-container>

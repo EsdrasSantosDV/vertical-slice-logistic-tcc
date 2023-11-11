@@ -1,0 +1,24 @@
+<mat-toolbar class="toolbar" color="primary">
+  <button
+    mat-icon-button
+    (click)="sidenavOpenEmit()"
+    class="toolbar__button"
+  >
+    <mat-icon class="toolbar__icon">menu</mat-icon>
+  </button>
+
+  <div class="toolbar__links">
+    <a routerLink="products">
+      <span>Produto</span>
+    </a>
+    <a routerLink="receipt">
+      <span>Recebimento</span>
+    </a>
+    <a routerLink="expedition">
+      <span>Expedição</span>
+    </a>
+    <a routerLink="stock">
+      <span>Níveis de Estoque</span>
+    </a>
+  </div>
+</mat-toolbar>

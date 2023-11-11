@@ -1,0 +1,12 @@
+<ng-container>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Tabela dos Produtos</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <app-generic-table [tableData]="products" [columns]="columns" [displayedColumns]="displayedColumns">
+      </app-generic-table>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

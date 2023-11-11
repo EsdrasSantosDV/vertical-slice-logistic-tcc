@@ -1,0 +1,17 @@
+<ng-container>
+  <form [formGroup]="form">
+    <div *ngFor="let field of fieldsGeneric">
+      <app-generic-control-dynamic
+        [fieldGeneric]="field"
+        [form]="form"></app-generic-control-dynamic>
+    </div>
+  </form>
+  <div class="form-actions">
+    <button mat-raised-button color="primary" (click)="resetForm()">
+      Limpar Filtros
+    </button>
+    <button mat-raised-button color="primary" (click)="searchFilters()">
+      Buscar
+    </button>
+  </div>
+</ng-container>
