@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   inject,
   Input,
+  Output,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
@@ -10,6 +12,7 @@ import { Product } from '../../models/model/product';
 import { GenericTableComponent } from '../../../../shared/ui/generic-table/generic-table.component';
 import { materialModules } from '../../../../shared/utils/material/material-module';
 import { CategoryEnumTranslatePipe } from '../../../../shared/pipes/product/category-enum-translate.pipe';
+import { ProductCategoryEnumTranslations } from '../../models/enum/product-category.enum';
 
 @Component({
   selector: 'app-product-table',
@@ -25,6 +28,7 @@ export class ProductTableComponent {
   })
   products!: Product[];
 
+  @Output() addProduct=new EventEmitter<void>();
 
   columns = [
     {
@@ -45,12 +49,12 @@ export class ProductTableComponent {
     {
       columnDef: 'category',
       header: 'Categoria de Produto',
-      cell: (element: Product) => `${element.category}`,
+      cell: (element: Product) => `${this.translateCategory(element)}`,
     },
     {
       columnDef: 'height',
       header: 'Altura do Produto',
-      cell: (element: Product) => `${element.height}`,
+      cell: (element: Product) => `${element.height} `,
     },
     {
       columnDef: 'width',
@@ -69,5 +73,15 @@ export class ProductTableComponent {
     },
   ];
 
+  translateCategory(product: Product, ...args: unknown[]): string {
+    const category = product.category;
+    return ProductCategoryEnumTranslations[category] || 'Unknown Category';
+  }
+
   displayedColumns = this.columns.map(c => c.columnDef);
+
+  addingProduct()
+  {
+    this.addProduct.emit();
+  }
 }

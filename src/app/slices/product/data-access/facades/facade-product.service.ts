@@ -5,6 +5,8 @@ import { TextBoxField } from '../../../../shared/utils/dynamic-forms/field-textb
 import { of, tap } from 'rxjs';
 import { Product } from '../../models/model/product';
 import { ProductService } from '../data-services/product.service';
+import { createDropdownOptionsFromEnum, ProductCategoryEnum, ProductCategoryEnumTranslations } from '../../models/enum/product-category.enum';
+import { MatDialog } from '@angular/material/dialog';
 
 export interface LogisticState {
   fieldsFilter: FieldBaseGeneric<string>[];
@@ -19,6 +21,8 @@ const initialState: Readonly<LogisticState> = {
 })
 export class FacadeProductService {
   readonly #productService = inject(ProductService);
+
+  readonly dialog=inject(MatDialog);
 
   readonly #state = signal(initialState);
 
@@ -37,6 +41,12 @@ export class FacadeProductService {
     );
   }
 
+  createProduct()
+  {
+    
+  }
+
+
   loadInitForms() {
     const fieldsForm: FieldBaseGeneric<string>[] = [
       new TextBoxField({
@@ -50,12 +60,7 @@ export class FacadeProductService {
       new DropdownField({
         key: 'category',
         label: 'Categoria do Produto',
-        options: [
-          { key: 'solid', value: 'Solid' },
-          { key: 'great', value: 'Great' },
-          { key: 'good', value: 'Good' },
-          { key: 'unproven', value: 'Unproven' },
-        ],
+        options: createDropdownOptionsFromEnum(),
         order: 2,
       }),
 

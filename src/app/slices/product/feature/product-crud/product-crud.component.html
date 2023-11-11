@@ -10,7 +10,7 @@
       </div>
 
       <div class="crud-feature__content">
-        <app-product-table [products]="products()"> </app-product-table>
+        <app-product-table [products]="products()" (addProduct)="addingProduct()"> </app-product-table>
       </div>
     </div>
   </div>
